@@ -12,11 +12,14 @@ import com.github.sarxos.webcam.ds.ipcam.IpCamDeviceRegistry;
 import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
 import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -47,10 +50,12 @@ public class PorterLaiccona {
 	panel.setFPSLimit(1);
 
 	JFrame frame = new JFrame("Porter Laiccona");
+        ImageIcon img = new ImageIcon(new File("").getAbsolutePath()+"\\logo.gif");
+        frame.setIconImage(img.getImage());
         frame.getContentPane().add(panel, BorderLayout.NORTH);
 
         OpenButton ob = new OpenButton("Obrir porta");
-        ob.setSize( 300, 200 );     
+        ob.setPreferredSize(new Dimension(60, 60)); 
         ob.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
