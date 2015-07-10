@@ -12,6 +12,8 @@ import com.github.sarxos.webcam.ds.ipcam.IpCamDeviceRegistry;
 import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
 import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +23,7 @@ import java.util.logging.Logger;
  * @author Marc Pascual Terrón
  */
 public class PorterLaiccona {
-
+    //private static PLCCommandSender commandSender = new PLCCommandSender();
 
     static {
 	Webcam.setDriver(new IpCamDriver());
@@ -30,10 +32,11 @@ public class PorterLaiccona {
         } catch (MalformedURLException ex) {
             Logger.getLogger(PorterLaiccona.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+         
     }
 
     public static void main(String[] args) throws MalformedURLException {
+        
         createFrame();
 
 	
@@ -48,7 +51,13 @@ public class PorterLaiccona {
 
         OpenButton ob = new OpenButton("Obrir porta");
         ob.setSize( 300, 200 );     
-        
+        ob.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                new PLCCommandSender().start();
+                
+            }
+        });
         frame.getContentPane().add(ob, BorderLayout.PAGE_END);
  
 	frame.pack();
